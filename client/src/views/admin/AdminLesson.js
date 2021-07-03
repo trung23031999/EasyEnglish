@@ -2,31 +2,37 @@ import NavbarAdmin from "../../components/layout/NavbarAdmin"
 import {Spinner, Container, Row, Col, Button, Table} from 'react-bootstrap'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect, useContext, useRef} from 'react'
 import { apiUrl } from "../../contexts/constants"
+const _ = require('lodash');
 
-const AdminLesson = () => {
+const AdminLesson = (props) => {
     const [listLesson, setListLesson] = useState([])
     const [listExLesson, setListExLesson] = useState([])
+    // const [no, setNo] = useState(0)
+    
 
     useEffect(() => {
         const getList = async () => {
             try {
                 const res = await axios.post(`${apiUrl}/api/auth/getLearnPage`)
                 const resEx = await axios.post(`${apiUrl}/api/auth/getExercisePage`)
-                console.log(res)
-                setListLesson(res.data[0].listLesson)
-                console.log(res.data[0].listLesson)
-                setListExLesson(resEx.data[0].exListLesson)
+
+                for (var i = 0; i < res.data.length; i++){
+                    setListLesson(listLesson => [...listLesson, ...res.data[i].listLesson])
+
+                }
+
+                for (var i = 0; i < resEx.data.length; i++){
+                    setListExLesson(listExLesson => [...listExLesson, ...resEx.data[i].exListLesson] )
+                }
             } catch (error) {
                 console.log(error.message)
             }
         }
 
         getList();
-        console.log(listLesson)
     }, [])
-
     return (
         <div>
             <NavbarAdmin/>
@@ -43,10 +49,10 @@ const AdminLesson = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listLesson.map(lesson => (
+                        {listLesson.map((lesson, no) => (
                             <tr >
                                 <td style={{width : '100px'}}><Button variant='primary'>Sửa</Button></td>
-                                <td style={{width : '80px'}}>{lesson.lessonId}</td>
+                                <td style={{width : '80px'}}>{no+ 1}</td>
                                 <td style={{width : '300px'}}>{lesson.lessonNameEn}</td>
                                 <td style={{width : '300px'}}>{lesson.lessonNameVn}</td>
                             </tr>
@@ -68,10 +74,10 @@ const AdminLesson = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listExLesson.map(exLesson => (
+                        {listExLesson.map((exLesson, noEx) => (
                             <tr >
                                 <td style={{width : '100px'}}><Button variant='primary'>Sửa</Button></td>
-                                <td style={{width : '80px'}}>{exLesson.exLessonId}</td>
+                                <td style={{width : '80px'}}>{noEx+ 1}</td>
                                 <td style={{width : '300px'}}>{exLesson.exLessonNameEn}</td>
                                 <td style={{width : '300px'}}>{exLesson.exLessonNameVn}</td>
                             </tr>

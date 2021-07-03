@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {useState, useEffect, useContext} from 'react'
 import { apiUrl } from "../../contexts/constants"
 
+
 const AdminTopic = () => {
     const [listTopic, setListTopic] = useState([])
     const [listExTopic, setListExTopic] = useState([])
@@ -48,7 +49,7 @@ const AdminTopic = () => {
                                 <td style={{width : '80px'}}>{topic.topicId}</td>
                                 <td style={{width : '300px'}}>{topic.topicNameEn}</td>
                                 <td style={{width : '300px'}}>{topic.topicNameVn}</td>
-                                <td style={{width : '120px'}}>{topic.listLesson.length}<Button style={{marginLeft : '20px'}} variant='primary'>Xem</Button></td>
+                                <td style={{width : '120px'}}>{topic.listLesson.length}<Link to={{pathname : '/admin/lesson', state : {topicId : topic.topicId}}}><Button style={{marginLeft : '20px'}} variant='primary'>Xem</Button></Link></td>
                             </tr>
                         ))}                     
                     </tbody>

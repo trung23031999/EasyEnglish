@@ -2,6 +2,7 @@ import {Button, ProgressBar, Spinner} from 'react-bootstrap'
 import {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import { apiUrl } from '../contexts/constants'
+import {Link} from 'react-router-dom'
 
 const ExStudy = (props) => {
     const [pageNum, setPageNum] = useState(0)
@@ -147,7 +148,7 @@ const ExStudy = (props) => {
                     ? <div><Button size='lg' variant='info' onClick={checkAnswer}>Kiểm tra</Button></div>
                     : (
                         (pageNum === datas.length -1) 
-                        ? <div><Button size='lg' variant='info' onClick={finish}>Kết thúc</Button></div>
+                        ? <div><Link to={{pathname : '/exercise', state : {exTopicId : props.location.state.exTopicId, exLessonId : props.location.state.exLessonId}}}><Button size='lg' variant='info' onClick={finish}>Kết thúc</Button></Link></div>
                         : <div><Button size='lg' variant='info' onClick={nextPage}>Tiếp tục</Button></div>
                     )   
                 }
