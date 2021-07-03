@@ -54,11 +54,6 @@ const Learn = (props) => {
         getLearnPage();
     }, [])
 
-
-    const style = {
-        borderRadius : 30
-    }
-
     if (isBusy) 
     return (
         <div className='spinner-container'>

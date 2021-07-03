@@ -10,6 +10,10 @@ import Ranking from './views/Ranking';
 import Study from './views/Study';
 import Exercise from './views/Exercise';
 import ExStudy from './views/ExStudy';
+import Admin from './views/admin/Admin';
+import AdminTopic from './views/admin/AdminTopic';
+import AdminLesson from './views/admin/AdminLesson';
+import AdminSlide from './views/admin/AdminSlide';
 
 function App() {
   return (
@@ -26,6 +30,26 @@ function App() {
               exact 
               path='/register' 
               render={props => <Auth {...props} authRoute='register'/>}
+            />
+            <ProtectedRoute
+              exact
+              path='/admin'
+              component={Admin}
+            />
+            <ProtectedRoute
+              exact
+              path='/admin/topic'
+              component={AdminTopic}
+            />
+            <ProtectedRoute
+              exact
+              path='/admin/lesson'
+              component={AdminLesson}
+            />
+            <ProtectedRoute
+              exact
+              path='/admin/slide'
+              component={AdminSlide}
             />
             <ProtectedRoute
               exact

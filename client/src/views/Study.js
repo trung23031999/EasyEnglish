@@ -78,8 +78,8 @@ const Study = (props) => {
     useEffect(() => {
         const getSlide = async () => {
             try {
-                if (props.location.state.type === 'theory'){
-                    const res = await axios.post(`${apiUrl}/api/auth/getTheorySlide`, {topicId : props.location.state.topicId, lessonId : props.location.state.lessonId})
+                // if (props.location.state.type === 'theory'){
+                    const res = await axios.post(`${apiUrl}/api/auth/getSlide`, {topicId : props.location.state.topicId, lessonId : props.location.state.lessonId})
                     setDatas(res.data)
                     
                     for (let i = 0; i < res.data.length -1 ; i++){
@@ -88,16 +88,16 @@ const Study = (props) => {
                     setAllPage(oldAllPage => [...oldAllPage, 1])
                     
                     setBusy(false)
-                } else if (props.location.state.type === 'practice') {
-                    const res = await axios.post(`${apiUrl}/api/auth/getPracticeSlide`, {topicId : props.location.state.topicId, lessonId : props.location.state.lessonId})
-                    setDatas(res.data)
+                // } else if (props.location.state.type === 'practice') {
+                //     const res = await axios.post(`${apiUrl}/api/auth/getPracticeSlide`, {topicId : props.location.state.topicId, lessonId : props.location.state.lessonId})
+                //     setDatas(res.data)
                     
-                    for (let i = 0; i < res.data.length  ; i++){
-                        setAllPage(oldAllPage => [...oldAllPage, 1])
-                    }
+                //     for (let i = 0; i < res.data.length  ; i++){
+                //         setAllPage(oldAllPage => [...oldAllPage, 1])
+                //     }
                     
-                    setBusy(false)
-                }
+                //     setBusy(false)
+                // }
             } catch (error) {
                 console.log(error.message)
             }

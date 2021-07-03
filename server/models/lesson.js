@@ -7,7 +7,8 @@ const lessonSchema = mongoose.Schema({
     lessonNameEn : String,
     type : String,
     minScore : {type : Number, default : 70},
-    maxScore : {type : Number, default : 100}
+    maxScore : {type : Number, default : 100},
+    slides : {type : [], default : []}
 })
 
 module.exports = mongoose.model('lesson', lessonSchema)

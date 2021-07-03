@@ -1,7 +1,4 @@
-import Carousel from 'react-bootstrap/Carousel'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
+import {Carousel, Navbar, Nav, Button, Container, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import Logo from '../assets/online-education.png'
 import Learn from '../assets/open-book.png'
@@ -10,10 +7,43 @@ import Ranking from '../assets/rank.png'
 import LP1 from '../assets/landing-page1.jpg'
 import LP2 from '../assets/landing-page2.jpg'
 import LP3 from '../assets/landing-page3.jpg'
+import Idea from '../assets/idea.png'
+import Motivation from '../assets/motivation.png'
+import Presentation from '../assets/presentation.png'
+import Facebook from '../assets/facebook.png'
+import Instagram from '../assets/instagram.png'
+import Twitter from '../assets/twitter.png'
+import Telegram from '../assets/telegram.png'
 
 const LandingPage = () => {
+    document.title = "Easy English"
+
+    const styleFooter = {
+        backgroundColor: "#2adaeb",
+        borderTop : '1px solid',
+        textAlign: "center",
+        padding: "20px",
+        position: "relative",
+        bottom : '0',
+        height: "150px",
+        width: "100%",
+    }
+    
+    const imgSize = {
+        height : '72px',
+        width : '72px'
+    }
+
+    const logoSize = {
+        height : '28px',
+        width : '28px',
+        marginRight : '15px'
+    }
+
     return (
-        <>
+        <div style={{display : 'flex', flexDirection : 'column', minHeight : '100vh'}}>
+            <title>Easy English</title>
+            <div style={{flex : 1}}>
             <Navbar expand='lg' bg='primary' variant='dark' className='shadow'>
             <Navbar.Brand className='font-weight-bolder text-white'>
                 <Nav.Link className='font-weight-bolder text-white' to='/dashboard' as={Link}>
@@ -37,10 +67,13 @@ const LandingPage = () => {
                         Xếp hạng
                     </Nav.Link>
                 </Nav>
+                <Nav>
+                    <Button style={{marginLeft : '00px'}} variant='danger' href='/login' size='lg'>Bắt đầu ngay</Button>
+                </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Carousel style={{zIndex : -1}}>
-                <Carousel.Item interval={1000}>
+            <Carousel style={{borderBottom : '1px solid'}}>
+                <Carousel.Item interval={3000}>
                     <img
                     width={900}
                     height={500}
@@ -52,7 +85,7 @@ const LandingPage = () => {
                     
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item interval={500}>
+                <Carousel.Item interval={3000}>
                     <img
                     width={900}
                     height={500}
@@ -63,7 +96,7 @@ const LandingPage = () => {
                     <Carousel.Caption>
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item>
+                <Carousel.Item interval={3000}>
                     <img
                     width={900}
                     height={500}
@@ -75,9 +108,56 @@ const LandingPage = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <Button style={{marginTop : '-200px', marginLeft : '100px', zIndex: 1}} variant='danger' href='/login' size='lg'>Bắt đầu</Button>
-
-        </>
+            <br/>
+            <div >
+                <div style={{textAlign : 'center', fontSize : '32px', fontStyle : 'bold'}}>Tại sao bạn nên sử dụng EasyEnglish?</div>
+                <br/>
+                <Container style={{marginRight : 'auto', marginLeft : 'auto'}}>
+                    <Row>
+                        <Col lg={{span : 3, offset: 1}} style={{textAlign : 'center'}}>
+                            <img src={Presentation} style={imgSize}/>
+                            <br/>
+                            <p>Kiến thức có chọn lọc, phân chia theo từng chủ đề. Kết hợp xen kẽ giữa lý thuyết và bài tập</p>
+                        </Col>
+                        <Col lg={{span : 3, offset: 1}} style={{textAlign : 'center'}}>
+                            <img src={Idea} style={imgSize}/>
+                            <br/>
+                            <p>Giao diện đẹp mắt, màu sắc nhẹ nhàng, chức năng dễ sử dụng</p>
+                        </Col>
+                        <Col lg={{span : 3, offset: 1}} style={{textAlign : 'center'}}>
+                            <img src={Motivation} style={imgSize}/>
+                            <br/>
+                            <p>Các tính năng kết hợp học mà chơi, chơi mà học, tạo hứng thú cho người dùng</p>
+                        </Col>
+                    </Row>
+                </Container> 
+            </div>
+            </div>
+            <div style={styleFooter}>
+                <Container style={{width : '100%', height : '100%'}}>
+                    <Row>
+                        <Col  lg={{span : 5}} style={{textAlign: 'left'}}>
+                            <b>Liên hệ</b>
+                            <br/>
+                            <span>Số điện thoại: 0386499267</span>
+                            <br/>
+                            <span>Email: trung23031999@gmail.com</span>
+                            <br/>
+                            <span>Facebook: fb.com/trung.nd.23.03</span>
+                        </Col>
+                        <Col lg={{span : 3, offset : 3}} style={{textAlign: 'left'}}>
+                            <b>Theo dõi chúng tôi tại</b>
+                            <br/>
+                            <img src={Facebook} style={logoSize}/>
+                            <img src={Instagram} style={logoSize}/>
+                            <img src={Twitter} style={logoSize}/>
+                            <img src={Telegram} style={logoSize}/>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            
+        </div>
     )
 }
 

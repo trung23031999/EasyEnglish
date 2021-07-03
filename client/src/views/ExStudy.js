@@ -43,8 +43,8 @@ const ExStudy = (props) => {
         setCheckResult(false);
     }
 
-    const finish = () => {
-
+    const finish = async () => {
+        await axios.post(`${apiUrl}/api/auth/finishExerciseLesson`, {exTopicId : props.location.state.exTopicId, exLessonId : props.location.state.exLessonId, currentScore : props.location.state.currentScore, minScore : props.location.state.minScore, newScore : score.current, username : props.location.state.username})
     }
 
     useEffect(() => {

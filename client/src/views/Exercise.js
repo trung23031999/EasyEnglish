@@ -1,16 +1,24 @@
 import QuotesContainer from '../components/layout/QuotesContainer'
 import NavbarMenu from "../components/layout/NavbarMenu"
 import {Accordion, Card, Button, Spinner, Container, Row, Col} from 'react-bootstrap'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import { apiUrl } from '../contexts/constants'
+import {AuthContext} from '../contexts/AuthContext'
 
 
 const Exercise = (props) => {
     const [exTopics, setExTopics] = useState([])
     const [isBusy, setBusy] = useState(true)
     const [defaultKey, setDefaultKey] = useState(0)
+    const [learnProcess, setLearnProcess] = useState()
+
+    const {
+        authState: {
+            user: {username}
+        }
+    } = useContext(AuthContext)
 
     useEffect(() => {
         const getExercisePage = async () => {
@@ -22,7 +30,8 @@ const Exercise = (props) => {
                 } else {
                     setDefaultKey(props.location.state.exTopicId)
                 }
-
+                const score = await axios.post(`${apiUrl}/api/auth/getExerciseProcess`, {username : username})
+                setLearnProcess(score.data)
                 setBusy(false)
                 const titleElement = document.getElementById(props.location.state.exTopicId + '/' + props.location.state.exLessonId)
                 titleElement.scrollIntoView({
@@ -36,9 +45,6 @@ const Exercise = (props) => {
 
         getExercisePage();
     }, [])
-
-    const learnProcess = [[], [], [],[],[],[],[]]
-
 
     if (isBusy) 
     return (
@@ -80,7 +86,7 @@ const Exercise = (props) => {
                                                     <td>{(learnProcess[exTopic.exTopicId-1][exLesson.exLessonId-1] ? learnProcess[exTopic.exTopicId-1][exLesson.exLessonId-1] : 0) + "/" + exLesson.maxScore}</td>
                                                     <td>
                                                         {/* không direct đến /study được vì thiếu style của lesson, phải direct đến trang /learn và lesson*/}
-                                                        <Link to={{pathname: '/exstudy', state : {exTopicId : exLesson.exTopicId, exLessonId : exLesson.exLessonId, type : exLesson.type}}}>
+                                                        <Link to={{pathname: '/exstudy', state : {exTopicId : exLesson.exTopicId, exLessonId : exLesson.exLessonId, type : exLesson.type, currentScore : learnProcess[exTopic.exTopicId-1][exLesson.exLessonId-1], minScore : exLesson.minScore, username : username}}}>
                                                         <Button variant='secondary'>Bắt đầu</Button>
                                                         </Link>
                                                     </td>
